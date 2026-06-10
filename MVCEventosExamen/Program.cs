@@ -14,7 +14,8 @@ builder.Services.AddHttpClient<ServiceEventos>(client =>
     client.BaseAddress = new Uri(apiUrl);
 });
 
-
+builder.Services.AddHttpClient<AiService>();
+builder.Services.AddScoped<AiService>();
 
 var app = builder.Build();
 
