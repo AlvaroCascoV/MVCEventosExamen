@@ -1,7 +1,20 @@
+using MVCEventosExamen.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+builder.Services.AddHttpClient<ServiceEventos>(client =>
+{
+    string apiUrl =
+        builder.Configuration["Api:ApiUrl"]!;
+
+    client.BaseAddress = new Uri(apiUrl);
+});
+
+
 
 var app = builder.Build();
 
