@@ -1,5 +1,8 @@
 ﻿@model List<Evento>
-
+@{
+    string bucketUrl =
+        ViewData["BUCKETURL"]?.ToString() ?? "";
+}
 <h1>Eventos</h1>
 
 <form method="post">
@@ -49,7 +52,7 @@ else
 
                 <div class="card">
 
-                    <img src="@evento.Imagen" alt="@evento.Imagen"
+                    <img src="@bucketUrl@evento.Imagen" alt="@evento.Imagen"
                          class="card-img-top">
 
                     <div class="card-body">

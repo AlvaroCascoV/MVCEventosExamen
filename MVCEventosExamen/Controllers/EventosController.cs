@@ -7,18 +7,21 @@ namespace MVCEventosExamen.Controllers
 {
     public class EventosController : Controller
     {
-        private ServiceEventos service;
+        private ServiceEventos service; 
+        private IConfiguration configuration;
 
-        public EventosController(ServiceEventos service)
+
+        public EventosController(ServiceEventos service, IConfiguration configuration)
         {
             this.service = service;
+            this.configuration = configuration;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             var categorias = await service.GetCategoriasAsync();
-
+            ViewData["BUCKETURL"] = this.configuration["AWS:BucketUrl"];
             ViewData["CATEGORIAS"] = categorias
                 .Select(x => new SelectListItem
                 {
@@ -44,6 +47,7 @@ namespace MVCEventosExamen.Controllers
                     Text = x.Nombre
                 });
 
+            ViewData["BUCKETURL"] = this.configuration["AWS:BucketUrl"];
             ViewData["IDCATEGORIA"] = idcategoria;
 
             List<Evento> eventos;
